@@ -1,0 +1,125 @@
+:root {
+  /* M7 Consulting brand palette (Brand CI, PDF p.54) */
+  --m7-navy: #0c2437;
+  --m7-orange: #ed9c4c;
+  --m7-yellow: #ffe783;
+  --m7-blue: #0196d0;
+  --m7-secondary-blue: #2f67b1;
+  --m7-soft-orange-bg: #fff4eb;
+  --m7-grey-bg: #f3f5f7;
+  --m7-white: #ffffff;
+  --m7-text: #111111;
+  --m7-text-secondary: #4a5560;
+  --m7-border: #d9dee3;
+
+  --font-heading: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow-card: 0 12px 28px -12px rgba(12, 36, 55, 0.18);
+  --shadow-soft: 0 4px 14px -6px rgba(12, 36, 55, 0.12);
+
+  --max-width: 1080px;
+
+  color-scheme: light;
+  color: var(--m7-text);
+  background: var(--m7-white);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--m7-text);
+  background: var(--m7-white);
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--m7-navy);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: var(--font-heading);
+}
+
+em,
+i,
+.italic {
+  font-family: var(--font-body);
+  font-style: italic;
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+/* Visible focus ring for keyboard users across all interactive elements */
+:focus-visible {
+  outline: 3px solid var(--m7-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 15px;
+  }
+}

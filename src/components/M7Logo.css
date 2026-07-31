@@ -1,0 +1,30 @@
+.m7-logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-heading);
+  line-height: 1;
+  user-select: none;
+}
+
+.m7-logo__mark {
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+
+.m7-logo__word {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+}
+
+.m7-logo--light .m7-logo__mark,
+.m7-logo--light .m7-logo__word {
+  color: var(--m7-white);
+}
+
+.m7-logo--dark .m7-logo__mark,
+.m7-logo--dark .m7-logo__word {
+  color: var(--m7-navy);
+}
