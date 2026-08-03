@@ -1,5 +1,4 @@
 import { M7Logo } from "./M7Logo";
-import { sections, TOTAL_QUESTIONS } from "../data/questions";
 import "./IntroScreen.css";
 
 interface IntroScreenProps {
@@ -69,29 +68,6 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
           <strong>What you'll get:</strong> Primary Fit · Alternative Path · Degree Need Score · Readiness Score ·
           Why This Result · One Question to Resolve Next
         </p>
-      </section>
-
-      <section className="intro__structure">
-        <div className="container">
-          <p className="eyebrow">Assessment Structure</p>
-          <h2 className="intro__section-title">
-            5 Sessions · {TOTAL_QUESTIONS} Questions Total
-          </h2>
-          <ol className="intro__structure-list">
-            {sections.map((section) => (
-              <li key={section.id} className="intro__structure-row">
-                <span className="intro__structure-number">{section.number}</span>
-                <span className="intro__structure-title">{section.title}</span>
-                <span className="intro__structure-measures">{section.measures.join(" · ")}</span>
-                <span className="intro__structure-count">{section.questionIds.length} Questions</span>
-              </li>
-            ))}
-          </ol>
-          <p className="intro__time-badge">Estimated completion time: 5–7 minutes</p>
-          <button type="button" className="btn btn-primary intro__cta" onClick={onStart}>
-            Start Your Assessment
-          </button>
-        </div>
       </section>
     </div>
   );

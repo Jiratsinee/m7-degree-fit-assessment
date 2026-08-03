@@ -49,7 +49,7 @@
 }
 
 .intro__section {
-  padding: 56px 0 40px;
+  padding: 56px 0 72px;
   text-align: left;
 }
 
@@ -102,95 +102,4 @@
   border-radius: var(--radius-md);
   color: var(--m7-text-secondary);
   font-size: 14.5px;
-}
-
-.intro__structure {
-  background: linear-gradient(160deg, var(--m7-blue) 0%, #1479ad 100%);
-  padding: 56px 0 64px;
-  color: var(--m7-white);
-}
-
-.intro__structure .eyebrow {
-  color: var(--m7-yellow);
-}
-
-.intro__structure .intro__section-title {
-  color: var(--m7-white);
-}
-
-.intro__structure-list {
-  list-style: none;
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.intro__structure-row {
-  display: grid;
-  grid-template-columns: 32px 1fr auto;
-  grid-template-areas: "num title count" "num measures measures";
-  column-gap: 14px;
-  row-gap: 4px;
-  align-items: baseline;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--radius-md);
-  padding: 16px 18px;
-}
-
-.intro__structure-number {
-  grid-area: num;
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 20px;
-  color: var(--m7-yellow);
-}
-
-.intro__structure-title {
-  grid-area: title;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 17px;
-}
-
-.intro__structure-measures {
-  grid-area: measures;
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.intro__structure-count {
-  grid-area: count;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 13px;
-  white-space: nowrap;
-}
-
-.intro__time-badge {
-  margin-top: 28px;
-  background: rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
-  padding: 14px 20px;
-  text-align: center;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.intro__structure .intro__cta {
-  display: flex;
-  margin: 28px auto 0;
-}
-
-@media (max-width: 640px) {
-  .intro__structure-row {
-    grid-template-columns: 28px 1fr;
-    grid-template-areas: "num title" "num measures" ". count";
-  }
-
-  .intro__structure-count {
-    justify-self: start;
-  }
 }
