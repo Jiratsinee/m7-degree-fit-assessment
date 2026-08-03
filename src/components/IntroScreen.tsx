@@ -64,10 +64,6 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
             </li>
           ))}
         </ul>
-        <p className="intro__whatyouget">
-          <strong>What you'll get:</strong> Primary Fit · Alternative Path · Degree Need Score · Readiness Score ·
-          Why This Result · One Question to Resolve Next
-        </p>
       </section>
     </div>
   );

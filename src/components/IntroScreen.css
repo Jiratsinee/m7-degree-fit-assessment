@@ -95,11 +95,3 @@
   font-size: 14px;
 }
 
-.intro__whatyouget {
-  margin-top: 28px;
-  padding: 18px 20px;
-  background: var(--m7-grey-bg);
-  border-radius: var(--radius-md);
-  color: var(--m7-text-secondary);
-  font-size: 14.5px;
-}

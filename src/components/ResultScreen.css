@@ -299,25 +299,6 @@
   line-height: 1.6;
 }
 
-.result__resolve {
-  background: var(--accent);
-  border-radius: var(--radius-md);
-  padding: 22px 26px;
-  color: var(--m7-white);
-}
-
-.result__resolve .eyebrow {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.result__resolve-text {
-  margin-top: 8px;
-  font-style: italic;
-  font-size: 18px;
-  font-weight: 600;
-  font-family: var(--font-heading);
-}
-
 .result__cta-block {
   background: var(--m7-navy);
   border-radius: var(--radius-md);

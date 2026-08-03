@@ -142,13 +142,6 @@ export function ResultScreen({ result, respondentName, onRestart }: ResultScreen
           </section>
         </div>
 
-        <section className="result__resolve" aria-labelledby="resolve-heading">
-          <p id="resolve-heading" className="eyebrow">
-            One Question to Resolve Next
-          </p>
-          <p className="result__resolve-text">{content.resolveQuestion}</p>
-        </section>
-
         <section className="result__cta-block" aria-labelledby="cta-heading">
           <p id="cta-heading" className="result__cta-label">
             M7 Consulting — Next Step
