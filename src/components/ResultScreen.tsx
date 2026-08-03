@@ -1,6 +1,6 @@
 import type { AssessmentResult } from "../logic/scoring";
 import { dimensionLabel } from "../logic/scoring";
-import { results, mixedFitNote, closingCta } from "../data/results";
+import { results, mixedFitNote, closingCta, ctaButtonLabel, ctaLink } from "../data/results";
 import type { ScoreKey } from "../data/questions";
 import { M7Logo } from "./M7Logo";
 import "./ResultScreen.css";
@@ -64,7 +64,6 @@ export function ResultScreen({ result, respondentName, onRestart }: ResultScreen
             {content.emergingDirection && (
               <div className="result__emerging">
                 <p className="result__emerging-label">Emerging Degree Direction</p>
-                <p className="result__emerging-title">{content.emergingDirection.title}</p>
                 <p className="result__emerging-text">{content.emergingDirection.text}</p>
               </div>
             )}
@@ -86,7 +85,7 @@ export function ResultScreen({ result, respondentName, onRestart }: ResultScreen
         <div className="result__columns">
           <section aria-labelledby="means-heading">
             <h2 id="means-heading" className="result__section-title">
-              What This Means for Your Degree Choice
+              What This Result Means for You
             </h2>
             {content.meansHeadline ? (
               <div className="result__means-box">
@@ -95,6 +94,7 @@ export function ResultScreen({ result, respondentName, onRestart }: ResultScreen
             ) : (
               <p className="result__means-statement">{content.meansStatement}</p>
             )}
+            {content.meansIntro && <p className="result__means-intro">{content.meansIntro}</p>}
             {content.meansBullets && (
               <ul className="result__bullets">
                 {content.meansBullets.map((b) => (
@@ -144,9 +144,15 @@ export function ResultScreen({ result, respondentName, onRestart }: ResultScreen
 
         <section className="result__cta-block" aria-labelledby="cta-heading">
           <p id="cta-heading" className="result__cta-label">
-            M7 Consulting — Next Step
+            {content.ctaHeading}
           </p>
-          <p className="result__cta-text">{content.ctaText}</p>
+          <a className="result__cta-link" href={ctaLink} target="_blank" rel="noopener noreferrer">
+            {ctaButtonLabel}
+            <span className="result__cta-arrow" aria-hidden="true">
+              →
+            </span>
+          </a>
+          <p className="result__cta-text">{content.ctaSupportingText}</p>
         </section>
       </main>
 
