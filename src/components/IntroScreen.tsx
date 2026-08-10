@@ -5,21 +5,6 @@ interface IntroScreenProps {
   onStart: () => void;
 }
 
-const whatWeMeasure = [
-  {
-    title: "Direction Fit",
-    text: "Do your goals point toward Management breadth or Technical depth?",
-  },
-  {
-    title: "Degree Need",
-    text: "Will a degree actually close the gap standing between you and your target role?",
-  },
-  {
-    title: "Learning Fit",
-    text: "Do you learn best through breadth and discussion, or depth and expertise?",
-  },
-];
-
 export function IntroScreen({ onStart }: IntroScreenProps) {
   return (
     <div className="intro">
@@ -40,26 +25,6 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
           </button>
         </div>
       </header>
-
-      <section className="container intro__section">
-        <p className="eyebrow">Series 1 of Find Your M7</p>
-        <h2 className="intro__section-title">Degree Fit</h2>
-        <p className="intro__section-lead">
-          Everyone leans toward an MBA or a Master's for a reason. The first step is discovering which one.
-        </p>
-        <ul className="intro__checklist">
-          {whatWeMeasure.map((item) => (
-            <li key={item.title}>
-              <span className="intro__checklist-icon" aria-hidden="true">
-                ✓
-              </span>
-              <span>
-                <strong>{item.title}</strong> — {item.text}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </section>
     </div>
   );
 }

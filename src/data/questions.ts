@@ -18,7 +18,11 @@ export type ScoreDelta = Partial<Record<ScoreKey, number>>;
 export interface Choice {
   id: string;
   text: string;
-  /** M7's rationale for this choice, shown directly beneath it on the question screen. */
+  /**
+   * M7's rationale for this choice. Intentionally NOT shown on the question screen — it
+   * would telegraph which answer points toward which degree. Kept as reference data (the
+   * source for each choice's scores below, and useful context for the result copy).
+   */
   m7Perspective: string;
   scores: ScoreDelta;
 }

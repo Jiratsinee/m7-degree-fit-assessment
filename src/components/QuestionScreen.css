@@ -68,7 +68,7 @@
   background: rgba(255, 255, 255, 0.97);
   border: 2px solid transparent;
   border-radius: var(--radius-md);
-  padding: 18px 20px;
+  padding: 16px 20px;
   cursor: pointer;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
@@ -118,22 +118,6 @@
   line-height: 1.4;
 }
 
-.question-screen__perspective {
-  margin-top: 10px;
-  margin-left: 48px;
-  color: var(--m7-text-secondary);
-  font-style: italic;
-  font-size: 14px;
-  line-height: 1.55;
-}
-
-.question-screen__perspective-label {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-style: normal;
-  color: var(--m7-secondary-blue);
-}
-
 .question-screen__choice:has(input:focus-visible) {
   outline: 3px solid var(--m7-yellow);
   outline-offset: 2px;
@@ -147,10 +131,6 @@
 }
 
 @media (max-width: 640px) {
-  .question-screen__perspective {
-    margin-left: 0;
-  }
-
   .question-screen__nav {
     flex-direction: column-reverse;
   }

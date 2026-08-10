@@ -52,9 +52,6 @@ export function QuestionScreen({ questionIndex, selectedChoiceId, onSelect, onNe
                       <span className="question-screen__choice-letter">{choice.id.toUpperCase()}</span>
                       <span className="question-screen__choice-text">{choice.text}</span>
                     </div>
-                    <p className="question-screen__perspective">
-                      <span className="question-screen__perspective-label">M7 Perspective</span> {choice.m7Perspective}
-                    </p>
                   </label>
                 );
               })}
