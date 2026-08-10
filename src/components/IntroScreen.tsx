@@ -18,10 +18,6 @@ const whatWeMeasure = [
     title: "Learning Fit",
     text: "Do you learn best through breadth and discussion, or depth and expertise?",
   },
-  {
-    title: "Readiness",
-    text: "Is your timeline, experience, and profile ready for this step now?",
-  },
 ];
 
 export function IntroScreen({ onStart }: IntroScreenProps) {
@@ -49,8 +45,7 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
         <p className="eyebrow">Series 1 of Find Your M7</p>
         <h2 className="intro__section-title">Degree Fit</h2>
         <p className="intro__section-lead">
-          Everyone leans toward an MBA or a Master's for a reason. The first step is discovering which one — and
-          whether you're ready.
+          Everyone leans toward an MBA or a Master's for a reason. The first step is discovering which one.
         </p>
         <ul className="intro__checklist">
           {whatWeMeasure.map((item) => (

@@ -1,486 +1,391 @@
-// Source of truth: "Find Your M7 — Framework Series 1: Degree Fit" (M7 Consulting)
-// Transcribed verbatim from the assessment PDF (pages 10-29).
-// Score keys map to the four core dimensions computed by the assessment:
-// mba (MBA Fit), masters (Master's Fit), clarity (Career Clarity), readiness (Readiness).
-// A missing key means the choice contributes 0 points ("—" in the source tables).
+// Source: "Find Your M7 — Framework Series 1: Degree Fit" (ver 2.1, M7 Consulting)
+// Transcribed verbatim from the assessment PDF (pages 9-20).
+//
+// SCORING NOTE: unlike v1 of this deck, the v2 question slides do not print an explicit
+// points table — each choice only carries a qualitative "M7 Perspective" note. The score
+// model (MAX_RAW = 22/22 over 11 questions, i.e. up to 2 points per question) is stated on
+// page 22. Per-choice point values below are inferred from each M7 Perspective's directional
+// language (a clear single-degree recommendation scores 2 points to that dimension; language
+// describing both paths, "depends on...", or an unresolved/exploring stance scores 0/0) and
+// cross-checked against the explicit lean hints the deck gives for Q3 and Q10 in the
+// Tie-Breaker Logic (page 26) — both check out under this rule, as does the fact that Option A
+// is the Master's-leaning choice on every single question, a consistent pattern across the set.
 
-export type ScoreKey = "mba" | "masters" | "clarity" | "readiness";
+export type ScoreKey = "mba" | "masters";
 
 export type ScoreDelta = Partial<Record<ScoreKey, number>>;
 
 export interface Choice {
   id: string;
   text: string;
+  /** M7's rationale for this choice, shown directly beneath it on the question screen. */
+  m7Perspective: string;
   scores: ScoreDelta;
 }
 
 export interface Question {
-  id: string; // q1..q15
-  number: number; // 1-15
-  sectionId: string;
+  id: string; // q1..q11
+  number: number; // 1-11
   text: string;
   choices: Choice[];
 }
-
-export interface Section {
-  id: string;
-  number: number; // 1-5
-  title: string;
-  measures: string[];
-  questionIds: string[];
-}
-
-export const sections: Section[] = [
-  {
-    id: "section-1",
-    number: 1,
-    title: "Where You Are Now",
-    measures: [
-      "Career stage",
-      "Current level of responsibility",
-      "Current career bottleneck",
-      "Early indication of MBA or Master's readiness",
-    ],
-    questionIds: ["q1", "q2", "q3"],
-  },
-  {
-    id: "section-2",
-    number: 2,
-    title: "Where You Want to Go",
-    measures: [
-      "Career direction",
-      "Desired future role",
-      "Specialist versus leadership orientation",
-      "Clarity of career decision-making",
-    ],
-    questionIds: ["q4", "q5", "q6"],
-  },
-  {
-    id: "section-3",
-    number: 3,
-    title: "What You Need from a Degree",
-    measures: [
-      "The outcome expected from graduate study",
-      "Reason for considering graduate school now",
-      "Connection between the degree and career direction",
-      "Whether a graduate degree is strategically necessary",
-    ],
-    questionIds: ["q7", "q8", "q9"],
-  },
-  {
-    id: "section-4",
-    number: 4,
-    title: "How You Want to Learn",
-    measures: [
-      "Learning style",
-      "Classroom preference",
-      "Preferred peer environment",
-      "MBA versus Master's learning fit",
-    ],
-    questionIds: ["q10", "q11", "q12"],
-  },
-  {
-    id: "section-5",
-    number: 5,
-    title: "How Ready You Are",
-    measures: [
-      "Timing",
-      "Current application evidence",
-      "Leadership and achievement",
-      "Academic starting point",
-    ],
-    questionIds: ["q13", "q14", "q15"],
-  },
-];
 
 export const questions: Question[] = [
   {
     id: "q1",
     number: 1,
-    sectionId: "section-1",
-    text: "Where are you currently in your career journey?",
+    text: "Where are you currently in your professional journey?",
     choices: [
-      { id: "a", text: "I'm still in university or recently graduated.", scores: { masters: 2 } },
+      {
+        id: "a",
+        text: "I'm a student or recent graduate (0–1 year).",
+        m7Perspective:
+          "A specialized Master's is often the strongest first step. It helps you build expertise and launch your career before investing in broader leadership education.",
+        scores: { masters: 2 },
+      },
       {
         id: "b",
-        text: "I have around 1–2 years of full-time work experience.",
-        scores: { mba: 1, masters: 1, readiness: 1 },
+        text: "I've started building my career (1–3 years).",
+        m7Perspective:
+          "You're at a transition point. A Master's can accelerate your career today, while an MBA may become more valuable after gaining additional leadership experience.",
+        scores: {},
       },
       {
         id: "c",
-        text: "I have 3 or more years of full-time work experience.",
-        scores: { mba: 2, readiness: 2 },
+        text: "I have 3–6 years of professional experience.",
+        m7Perspective:
+          "This is typically the ideal stage to consider an MBA. You have enough experience to contribute meaningfully in class while maximizing the program's career impact.",
+        scores: { mba: 2 },
+      },
+      {
+        id: "d",
+        text: "I already manage teams, projects, or business outcomes.",
+        m7Perspective: "An MBA can help you move from operational leadership to strategic leadership and prepare you for executive-level responsibilities.",
+        scores: { mba: 2 },
       },
     ],
   },
   {
     id: "q2",
     number: 2,
-    sectionId: "section-1",
-    text: "Which description feels closest to your current role?",
+    text: "What is your primary reason for pursuing graduate school?",
     choices: [
       {
         id: "a",
-        text: "I'm still learning how the industry and different roles work.",
-        scores: { masters: 1 },
+        text: "To become an expert in my field.",
+        m7Perspective: "A specialized Master's is usually the best path when your goal is depth of expertise.",
+        scores: { masters: 2 },
       },
       {
         id: "b",
-        text: "I'm beginning to take ownership of projects or a specific area.",
-        scores: { mba: 1, masters: 1, clarity: 1, readiness: 1 },
+        text: "To accelerate my career progression.",
+        m7Perspective: "An MBA is designed for professionals looking to unlock bigger responsibilities and leadership opportunities.",
+        scores: { mba: 2 },
       },
       {
         id: "c",
-        text: "I'm responsible for making decisions, influencing others, or driving outcomes.",
-        scores: { mba: 2, clarity: 2, readiness: 2 },
+        text: "To switch industries or job functions.",
+        m7Perspective:
+          "Career transitions often require both a new network and a new narrative — making an MBA or a selected career-focused Master's worth exploring.",
+        scores: {},
       },
       {
         id: "d",
-        text: "My current role no longer gives me the growth or direction I'm looking for.",
-        scores: { mba: 1, masters: 1, clarity: 1, readiness: 1 },
+        text: "To expand my international opportunities.",
+        m7Perspective: "Both pathways can open global doors. The better choice depends on the career you ultimately want to build.",
+        scores: {},
       },
     ],
   },
   {
     id: "q3",
     number: 3,
-    sectionId: "section-1",
-    text: "When you feel stuck at work, what is usually missing?",
+    text: "Which career ambition sounds most like you?",
     choices: [
-      { id: "a", text: "A clearer understanding of what career paths are available.", scores: {} },
+      {
+        id: "a",
+        text: "I want to become a leading specialist.",
+        m7Perspective: "Master's programs are designed to help you develop world-class expertise.",
+        scores: { masters: 2 },
+      },
       {
         id: "b",
-        text: "Stronger technical or functional skills.",
-        scores: { masters: 2, clarity: 1, readiness: 1 },
+        text: "I want to lead businesses and organizations.",
+        m7Perspective: "Leadership development is one of the strongest reasons to pursue an MBA.",
+        scores: { mba: 2 },
       },
       {
         id: "c",
-        text: "More confidence in making business decisions.",
-        scores: { mba: 2, clarity: 1, readiness: 1 },
+        text: "I want to build my own company.",
+        m7Perspective: "Entrepreneurs often benefit from MBA programs because they combine strategy, leadership, finance, and powerful peer networks.",
+        scores: { mba: 2 },
       },
       {
         id: "d",
-        text: "Access to better opportunities, people, or industries.",
-        scores: { mba: 2, masters: 1, clarity: 1, readiness: 1 },
+        text: "I'm still exploring different possibilities.",
+        m7Perspective: "Before choosing a degree, you may first need greater clarity about your long-term direction.",
+        scores: {},
       },
     ],
   },
   {
     id: "q4",
     number: 4,
-    sectionId: "section-2",
-    text: "Imagine your career three years from now. Which change would feel most meaningful to you?",
+    text: "Which outcome matters most to you?",
     choices: [
-      { id: "a", text: "I've discovered a field or role that genuinely fits me.", scores: { masters: 1 } },
+      {
+        id: "a",
+        text: "Building technical expertise.",
+        m7Perspective: "A specialized Master's offers the greatest return when expertise is your priority.",
+        scores: { masters: 2 },
+      },
       {
         id: "b",
-        text: "I'm recognized for expertise in a specific area.",
-        scores: { masters: 2, clarity: 2, readiness: 1 },
+        text: "Developing leadership skills.",
+        m7Perspective: "MBA programs are built around developing leaders rather than specialists.",
+        scores: { mba: 2 },
       },
       {
         id: "c",
-        text: "I'm leading larger projects, teams, or business decisions.",
-        scores: { mba: 2, clarity: 2, readiness: 1 },
+        text: "Building a global professional network.",
+        m7Perspective: "Top MBA programs are particularly valuable for peer learning and lifelong networks.",
+        scores: { mba: 2 },
       },
       {
         id: "d",
-        text: "I've successfully moved into a new industry, function, or country.",
-        scores: { mba: 2, masters: 1, clarity: 2, readiness: 1 },
+        text: "Finding clarity about my future.",
+        m7Perspective: "The right degree begins with the right direction — not simply the highest ranking.",
+        scores: {},
       },
     ],
   },
   {
     id: "q5",
     number: 5,
-    sectionId: "section-2",
-    text: "Which type of challenge would you most enjoy working on?",
+    text: "Which learning style do you enjoy most?",
     choices: [
       {
         id: "a",
-        text: "Exploring an unfamiliar problem and figuring out where to begin.",
-        scores: { mba: 1, masters: 1, clarity: 1 },
+        text: "Academic and technical learning.",
+        m7Perspective: "This learning style aligns naturally with most specialized Master's programs.",
+        scores: { masters: 2 },
       },
       {
         id: "b",
-        text: "Solving a complex technical or analytical problem.",
-        scores: { masters: 2, clarity: 2, readiness: 1 },
+        text: "Business cases and strategic discussions.",
+        m7Perspective: "Case-based learning is a hallmark of MBA education.",
+        scores: { mba: 2 },
       },
       {
         id: "c",
-        text: "Making decisions that involve people, markets, and business trade-offs.",
-        scores: { mba: 2, clarity: 2, readiness: 1 },
+        text: "Working with diverse teams.",
+        m7Perspective: "Both MBA and Master's programs value collaboration, but MBA classrooms rely heavily on peer learning.",
+        scores: { mba: 2 },
       },
       {
         id: "d",
-        text: "Bringing together different teams to move one goal forward.",
-        scores: { mba: 2, clarity: 2, readiness: 1 },
+        text: "Learning through real-world business exposure.",
+        m7Perspective: "Experiential learning exists in both pathways — the right choice depends on your career stage.",
+        scores: {},
       },
     ],
   },
   {
     id: "q6",
     number: 6,
-    sectionId: "section-2",
-    text: "If you received three attractive job offers today, what would help you decide?",
+    text: "What would you value most from the people in your classroom?",
     choices: [
-      { id: "a", text: "I would need more time to explore which path suits me.", scores: {} },
+      {
+        id: "a",
+        text: "People with similar academic or technical interests.",
+        m7Perspective: "Learning alongside peers with shared technical interests can deepen your expertise, making a specialized Master's a natural fit.",
+        scores: { masters: 2 },
+      },
       {
         id: "b",
-        text: "I would choose the role that builds the strongest specialist skills.",
-        scores: { masters: 2, clarity: 1, readiness: 1 },
+        text: "People who can challenge how I think about business problems.",
+        m7Perspective: "MBA classrooms are designed around perspectives that challenge your assumptions and strengthen your strategic thinking.",
+        scores: { mba: 2 },
       },
       {
         id: "c",
-        text: "I would choose the role with the clearest leadership and growth path.",
-        scores: { mba: 2, clarity: 1, readiness: 1 },
+        text: "People from different industries, functions, and countries.",
+        m7Perspective: "Diverse peer perspectives are one of the greatest strengths of an MBA, expanding both how you think and who you can learn from.",
+        scores: { mba: 2 },
       },
       {
         id: "d",
-        text: "I would choose the role that brings me closest to my long-term goal.",
-        scores: { mba: 1, masters: 1, clarity: 2, readiness: 1 },
+        text: "People who are also exploring what direction suits them.",
+        m7Perspective: "A collaborative environment can support your exploration, but greater clarity will help you choose the degree that creates the most value.",
+        scores: {},
       },
     ],
   },
   {
     id: "q7",
     number: 7,
-    sectionId: "section-3",
-    text: "Which outcome would make a graduate degree feel worth the investment?",
+    text: "How would you describe your professional experience?",
     choices: [
-      { id: "a", text: "Discovering a clearer direction for my career.", scores: {} },
+      {
+        id: "a",
+        text: "Mostly internships, research, or university projects.",
+        m7Perspective: "You're in a strong position to leverage a Master's before accumulating more professional experience.",
+        scores: { masters: 2 },
+      },
       {
         id: "b",
-        text: "Gaining skills I cannot easily build in my current role.",
-        scores: { masters: 2, clarity: 1, readiness: 1 },
+        text: "I've developed solid experience as an individual contributor.",
+        m7Perspective: "Both MBA and Master's remain viable options depending on your next career objective.",
+        scores: {},
       },
       {
         id: "c",
-        text: "Accessing employers, industries, or countries that are currently difficult to reach.",
-        scores: { mba: 2, masters: 1, clarity: 2, readiness: 1 },
+        text: "I've led major projects.",
+        m7Perspective: "Leadership ownership strengthens both your MBA readiness and admissions competitiveness.",
+        scores: { mba: 2 },
       },
       {
         id: "d",
-        text: "Building the credibility and network to take on larger leadership roles.",
-        scores: { mba: 2, clarity: 2 },
+        text: "I've managed teams or business outcomes.",
+        m7Perspective: "You already have valuable leadership experiences that MBA classrooms are designed to build upon.",
+        scores: { mba: 2 },
       },
     ],
   },
   {
     id: "q8",
     number: 8,
-    sectionId: "section-3",
-    text: "If graduate school were not an option next year, what would you most likely do instead?",
+    text: "How clear is your long-term career direction?",
     choices: [
-      { id: "a", text: "Try different roles or projects to understand what suits me.", scores: {} },
+      {
+        id: "a",
+        text: "I know exactly what I want to specialize in.",
+        m7Perspective: "Specialization usually points toward a Master's.",
+        scores: { masters: 2 },
+      },
       {
         id: "b",
-        text: "Take courses or certifications to strengthen a specific skill.",
-        scores: { masters: 1, clarity: 1, readiness: 1 },
+        text: "I know where I want my career to go.",
+        m7Perspective: "Clear career direction is one of the strongest foundations for a successful MBA.",
+        scores: { mba: 2 },
       },
       {
         id: "c",
-        text: "Look for a job with more responsibility or leadership exposure.",
-        scores: { mba: 1, clarity: 2 },
+        text: "I'm still figuring it out.",
+        m7Perspective: "Choosing a degree before defining your direction often leads to unnecessary detours.",
+        scores: {},
       },
       {
         id: "d",
-        text: "Continue pursuing the same goal through work experience and networking.",
-        scores: { mba: 1, clarity: 2, readiness: 1 },
+        text: "I'm planning a major career change.",
+        m7Perspective: "An MBA is frequently used as a platform for career transformation.",
+        scores: { mba: 2 },
       },
     ],
   },
   {
     id: "q9",
     number: 9,
-    sectionId: "section-3",
-    text: "What has been pushing you to think about graduate school now?",
+    text: "Which opportunity excites you most?",
     choices: [
       {
         id: "a",
-        text: "I see people around me moving ahead and do not want to fall behind.",
-        scores: {},
+        text: "Becoming an expert.",
+        m7Perspective: "Master's programs help develop deep expertise within a specific discipline.",
+        scores: { masters: 2 },
       },
       {
         id: "b",
-        text: "I've reached a point where my current skills are limiting me.",
-        scores: { masters: 2, clarity: 1, readiness: 1 },
+        text: "Leading organizations.",
+        m7Perspective: "Leadership is one of the defining outcomes of an MBA.",
+        scores: { mba: 2 },
       },
       {
         id: "c",
-        text: "A specific career opportunity requires a stronger profile or new qualification.",
-        scores: { mba: 1, masters: 1, clarity: 2, readiness: 2 },
+        text: "Working internationally.",
+        m7Perspective: "Both pathways can support international careers — the right one depends on your long-term goals.",
+        scores: {},
       },
       {
         id: "d",
-        text: "My long-term direction is becoming clearer, and the degree feels like the next step.",
-        scores: { mba: 1, masters: 1, clarity: 2, readiness: 2 },
+        text: "Solving complex business challenges.",
+        m7Perspective: "This strategic mindset naturally aligns with MBA education.",
+        scores: { mba: 2 },
       },
     ],
   },
   {
     id: "q10",
     number: 10,
-    sectionId: "section-4",
-    text: "How do you learn best?",
+    text: "What do you expect your graduate degree to do for you?",
     choices: [
       {
         id: "a",
-        text: "Lectures, technical coursework, and individual projects.",
-        scores: { masters: 2, clarity: 1, readiness: 1 },
+        text: "Increase my technical credibility.",
+        m7Perspective: "A specialized Master's is often the fastest route toward becoming highly competitive in technical roles.",
+        scores: { masters: 2 },
       },
       {
         id: "b",
-        text: "Group discussions, real-world business cases, and hands-on projects.",
-        scores: { mba: 2, clarity: 1, readiness: 1 },
+        text: "Prepare me for senior leadership.",
+        m7Perspective: "MBA programs are designed to accelerate leadership progression.",
+        scores: { mba: 2 },
       },
       {
         id: "c",
-        text: "Networking events, clubs, and learning from peers.",
-        scores: { mba: 2, clarity: 1, readiness: 1 },
+        text: "Expand my career opportunities globally.",
+        m7Perspective: "Global mobility depends less on the degree itself and more on how well it supports your career strategy.",
+        scores: {},
+      },
+      {
+        id: "d",
+        text: "Create more long-term career options.",
+        m7Perspective: "The best degree is the one that creates the greatest future optionality — not necessarily the most prestigious one.",
+        scores: {},
       },
     ],
   },
   {
     id: "q11",
     number: 11,
-    sectionId: "section-4",
-    text: "What would you value most from the people in your classroom?",
+    text: "Which statement resonates with you the most?",
     choices: [
       {
         id: "a",
-        text: "People with similar academic or technical interests.",
-        scores: { masters: 2, clarity: 1, readiness: 1 },
+        text: "I want to master my field.",
+        m7Perspective: "Master's programs help you deepen your expertise and become a recognized specialist.",
+        scores: { masters: 2 },
       },
       {
         id: "b",
-        text: "People who can challenge how I think about business problems.",
-        scores: { mba: 2, clarity: 1, readiness: 1 },
+        text: "I want to become a leader.",
+        m7Perspective: "Leadership is exactly what MBA programs are designed to develop.",
+        scores: { mba: 2 },
       },
       {
         id: "c",
-        text: "People from different industries, functions, and countries.",
-        scores: { mba: 2, clarity: 1, readiness: 1 },
-      },
-      { id: "d", text: "People who are also exploring what direction suits them.", scores: {} },
-    ],
-  },
-  {
-    id: "q12",
-    number: 12,
-    sectionId: "section-4",
-    text: "Which assignment would you be most excited to work on?",
-    choices: [
-      {
-        id: "a",
-        text: "Build a model, analysis, or technical solution.",
-        scores: { masters: 2, clarity: 1, readiness: 1 },
-      },
-      {
-        id: "b",
-        text: "Recommend a strategy for a real company facing a difficult decision.",
-        scores: { mba: 2, clarity: 1, readiness: 1 },
-      },
-      {
-        id: "c",
-        text: "Lead a team with different opinions toward one final recommendation.",
-        scores: { mba: 2, clarity: 1, readiness: 1 },
-      },
-      { id: "d", text: "Research several career paths and identify which one fits me best.", scores: {} },
-    ],
-  },
-  {
-    id: "q13",
-    number: 13,
-    sectionId: "section-5",
-    text: "What would make the timing of a degree work best for you?",
-    choices: [
-      {
-        id: "a",
-        text: "Starting soon so I can enter the job market with stronger skills.",
-        scores: { masters: 2, clarity: 1, readiness: 2 },
-      },
-      {
-        id: "b",
-        text: "Having enough time to complete an internship and explore a new career path.",
-        scores: { mba: 2, masters: 1, clarity: 2, readiness: 1 },
-      },
-      {
-        id: "c",
-        text: "Waiting until I have stronger work achievements to bring into the classroom.",
-        scores: { mba: 1, clarity: 2 },
-      },
-      { id: "d", text: "I'm still unsure what the degree should help me achieve.", scores: {} },
-    ],
-  },
-  {
-    id: "q14",
-    number: 14,
-    sectionId: "section-5",
-    text: "Which statement best reflects what you could talk about in an application today?",
-    choices: [
-      {
-        id: "a",
-        text: "I'm still building experiences that show what I'm interested in.",
-        scores: {},
-      },
-      {
-        id: "b",
-        text: "I have a few relevant projects, courses, or internships.",
-        scores: { masters: 2, clarity: 1, readiness: 1 },
-      },
-      {
-        id: "c",
-        text: "I can point to clear achievements or increasing responsibility at work.",
-        scores: { mba: 1, masters: 1, clarity: 2, readiness: 2 },
+        text: "I want to reinvent my career.",
+        m7Perspective: "An MBA can provide the platform, network, and credibility needed to make a successful career transition.",
+        scores: { mba: 2 },
       },
       {
         id: "d",
-        text: "I have led people, influenced decisions, or created measurable impact.",
-        scores: { mba: 2, clarity: 2, readiness: 2 },
+        text: "I want to maximize my long-term potential.",
+        m7Perspective: "The most important decision isn't choosing an MBA or a Master's — it's choosing the path that best aligns with the future you want to build.",
+        scores: {},
       },
-    ],
-  },
-  {
-    id: "q15",
-    number: 15,
-    sectionId: "section-5",
-    text: "How would you describe your academic starting point?",
-    choices: [
-      {
-        id: "a",
-        text: "My academic record and test performance are among my strengths.",
-        scores: { mba: 1, masters: 1, clarity: 1, readiness: 2 },
-      },
-      {
-        id: "b",
-        text: "My academic profile is solid, although there may be areas to improve.",
-        scores: { mba: 1, masters: 1, clarity: 1, readiness: 1 },
-      },
-      {
-        id: "c",
-        text: "My work experience or practical achievements are stronger than my academic record.",
-        scores: { mba: 2, clarity: 1, readiness: 1 },
-      },
-      { id: "d", text: "I have not reviewed the academic requirements yet.", scores: {} },
     ],
   },
 ];
 
 export const TOTAL_QUESTIONS = questions.length;
 
-// Maximum attainable raw score per dimension (stated in the PDF, verified against the
-// per-question maximums above).
+// Maximum attainable raw score per dimension (PDF p.22): 11 questions × 2 points.
 export const MAX_RAW: Record<ScoreKey, number> = {
-  mba: 28,
-  masters: 27,
-  clarity: 23,
-  readiness: 21,
+  mba: 22,
+  masters: 22,
 };
 
 export function getQuestion(id: string): Question | undefined {
   return questions.find((q) => q.id === id);
-}
-
-export function getSection(id: string): Section | undefined {
-  return sections.find((s) => s.id === id);
 }

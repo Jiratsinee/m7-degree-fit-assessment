@@ -1,4 +1,4 @@
-import { getSection, questions, TOTAL_QUESTIONS } from "../data/questions";
+import { questions, TOTAL_QUESTIONS } from "../data/questions";
 import { ProgressBar } from "./ProgressBar";
 import "./QuestionScreen.css";
 
@@ -12,33 +12,24 @@ interface QuestionScreenProps {
 
 export function QuestionScreen({ questionIndex, selectedChoiceId, onSelect, onNext, onPrev }: QuestionScreenProps) {
   const question = questions[questionIndex];
-  const section = getSection(question.sectionId)!;
   const questionNumber = questionIndex + 1;
-  const sessionQuestionIndex = section.questionIds.indexOf(question.id) + 1;
 
   return (
     <div className="question-screen">
-      <div className="question-screen__part container">
-        <h2 className="question-screen__part-title">
-          Part {section.number}: <span>{section.title}</span>
-        </h2>
+      <div className="question-screen__top">
+        <div className="container question-screen__top-inner">
+          <ProgressBar current={questionNumber} total={TOTAL_QUESTIONS} />
+          <span className="pill-badge question-screen__pill">
+            Question {questionNumber} of {TOTAL_QUESTIONS}
+          </span>
+          <h2 className="question-screen__question">{question.text}</h2>
+        </div>
       </div>
 
       <div className="question-screen__body">
         <div className="container question-screen__body-inner">
-          <ProgressBar current={questionNumber} total={TOTAL_QUESTIONS} />
-
-          <div className="question-screen__meta">
-            <span className="pill-badge">
-              Session {section.number} · Question {sessionQuestionIndex} of {section.questionIds.length}
-            </span>
-            <span className="question-screen__overall" aria-live="polite">
-              Question {questionNumber} of {TOTAL_QUESTIONS}
-            </span>
-          </div>
-
           <fieldset className="question-screen__fieldset">
-            <legend className="question-screen__question">{question.text}</legend>
+            <legend className="visually-hidden">{question.text}</legend>
             <div className="question-screen__choices" role="radiogroup" aria-label={question.text}>
               {question.choices.map((choice) => {
                 const inputId = `${question.id}-${choice.id}`;
@@ -57,8 +48,13 @@ export function QuestionScreen({ questionIndex, selectedChoiceId, onSelect, onNe
                       checked={checked}
                       onChange={() => onSelect(question.id, choice.id)}
                     />
-                    <span className="question-screen__choice-letter">{choice.id.toUpperCase()}</span>
-                    <span className="question-screen__choice-text">{choice.text}</span>
+                    <div className="question-screen__choice-header">
+                      <span className="question-screen__choice-letter">{choice.id.toUpperCase()}</span>
+                      <span className="question-screen__choice-text">{choice.text}</span>
+                    </div>
+                    <p className="question-screen__perspective">
+                      <span className="question-screen__perspective-label">M7 Perspective</span> {choice.m7Perspective}
+                    </p>
                   </label>
                 );
               })}

@@ -1,6 +1,5 @@
 import type { AssessmentResult } from "../logic/scoring";
-import { dimensionLabel } from "../logic/scoring";
-import { results, mixedFitNote, closingCta, ctaButtonLabel, ctaLink } from "../data/results";
+import { results, closingCta, ctaButtonLabel, ctaLink, emergingDirectionText } from "../data/results";
 import type { ScoreKey } from "../data/questions";
 import { M7Logo } from "./M7Logo";
 import "./ResultScreen.css";
@@ -11,17 +10,17 @@ interface ResultScreenProps {
   onRestart: () => void;
 }
 
-const scoreOrder: ScoreKey[] = ["mba", "masters", "clarity", "readiness"];
+const scoreOrder: { key: ScoreKey; label: string }[] = [
+  { key: "mba", label: "MBA Fit" },
+  { key: "masters", label: "Master's Fit" },
+];
 
 export function ResultScreen({ result, respondentName, onRestart }: ResultScreenProps) {
   const content = results[result.resultId];
   const firstName = respondentName.trim().split(/\s+/)[0];
 
   function isMuted(key: ScoreKey): boolean {
-    if (!result.primaryDegree) return true;
-    if (key === "mba" && result.primaryDegree === "masters") return true;
-    if (key === "masters" && result.primaryDegree === "mba") return true;
-    return false;
+    return result.primaryDegree !== key;
   }
 
   return (
@@ -29,10 +28,7 @@ export function ResultScreen({ result, respondentName, onRestart }: ResultScreen
       <header className="result__header">
         <div className="container">
           <p className="result__eyebrow">Your Degree Fit Result</p>
-          <h1 className="result__title">
-            {content.label}
-            {content.subLabel && <span className="result__sublabel"> ({content.subLabel})</span>}
-          </h1>
+          <h1 className="result__title">{content.label}</h1>
           <p className="result__tagline">{content.tagline}</p>
           {firstName && <p className="result__greeting">Prepared for {firstName}</p>}
         </div>
@@ -52,19 +48,19 @@ export function ResultScreen({ result, respondentName, onRestart }: ResultScreen
                 </tr>
               </thead>
               <tbody>
-                {scoreOrder.map((key) => (
+                {scoreOrder.map(({ key, label }) => (
                   <tr key={key}>
-                    <th scope="row">{dimensionLabel(key)}</th>
+                    <th scope="row">{label}</th>
                     <td className={isMuted(key) ? "is-muted" : "is-accent"}>{result.percent[key]}%</td>
                   </tr>
                 ))}
               </tbody>
             </table>
 
-            {content.emergingDirection && (
+            {result.emergingDirection && (
               <div className="result__emerging">
-                <p className="result__emerging-label">Emerging Degree Direction</p>
-                <p className="result__emerging-text">{content.emergingDirection.text}</p>
+                <p className="result__emerging-label">Emerging Direction</p>
+                <p className="result__emerging-text">{emergingDirectionText[result.emergingDirection]}</p>
               </div>
             )}
           </section>
@@ -74,7 +70,6 @@ export function ResultScreen({ result, respondentName, onRestart }: ResultScreen
               Why You Received This Result
             </h2>
             <div className="callout result__why">
-              {result.isMixedFit && <p className="result__mixed-note">{mixedFitNote}</p>}
               {content.whyText.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}

@@ -10,10 +10,6 @@
   --accent: var(--m7-secondary-blue);
 }
 
-.result--orange {
-  --accent: var(--m7-orange);
-}
-
 .result--navy {
   --accent: var(--m7-navy);
 }
@@ -37,13 +33,6 @@
   color: var(--m7-white);
   font-size: clamp(28px, 5vw, 40px);
   margin-top: 8px;
-}
-
-.result__sublabel {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-style: italic;
-  font-size: 0.55em;
 }
 
 .result__tagline {

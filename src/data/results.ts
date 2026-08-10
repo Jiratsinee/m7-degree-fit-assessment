@@ -1,26 +1,19 @@
-// Source: "Find Your M7 — Degree Fit" result-card slides (Google Slides export) and
-// page 52 of the original framework deck (closing M7 Consulting CTA). Copy transcribed
-// verbatim; no content invented.
+// Source: "Find Your M7 — Framework Series 1: Degree Fit" PDF (ver 2.1), pages 28-33
+// (Result Cards), page 26 (Tie-Breaker Logic), and page 36 (closing M7 Consulting CTA).
+// Copy transcribed verbatim; no content invented beyond what page 26 requires (see
+// emergingDirectionText below).
 
-export type ResultId =
-  | "mba-oriented"
-  | "masters-oriented"
-  | "experience-first-mba"
-  | "experience-first-masters"
-  | "exploration-first";
+export type ResultId = "mba-oriented" | "masters-oriented" | "exploration-first";
 
-export type AccentKey = "blue" | "secondaryBlue" | "orange" | "navy";
+export type AccentKey = "blue" | "secondaryBlue" | "navy";
 
 export interface ResultContent {
   id: ResultId;
   label: string;
-  subLabel?: string;
   tagline: string;
   accent: AccentKey;
   /** "Why You Received This Result" — one or more paragraphs. */
   whyText: string[];
-  /** Emerging Degree Direction card — Experience-First results only. */
-  emergingDirection?: { text: string };
   /** "What This Result Means for You" */
   meansHeadline?: string;
   meansStatement: string;
@@ -121,89 +114,13 @@ export const results: Record<ResultId, ResultContent> = {
     ctaSupportingText: "Work with an M7 admissions expert to define your specialization, target programs, and personalized application roadmap.",
   },
 
-  "experience-first-mba": {
-    id: "experience-first-mba",
-    label: "Experience-First",
-    subLabel: "Tentatively MBA",
-    tagline: "Your MBA direction is becoming clearer, but building stronger professional evidence first may help you gain more value from the degree.",
-    accent: "orange",
-    whyText: [
-      "Your answers show growing alignment with broader business responsibility, leadership development, and strategic decision-making.",
-      "However, your current profile may not yet include enough professional maturity, increasing responsibility, leadership evidence, or measurable impact for you to gain the greatest value from an MBA or compete strongly for your target programs.",
-      "Strengthening these areas first can help you enter the MBA journey with a clearer story, stronger classroom contribution, and more competitive application.",
-    ],
-    emergingDirection: {
-      text: "Your goals show stronger alignment with an MBA, but additional experience, responsibility, and evidence of impact may strengthen both your readiness and future application.",
-    },
-    meansHeadline: "An MBA may be the right future direction, but your profile could become stronger before you apply.",
-    meansStatement: "An MBA may be the right future direction, but your profile could become stronger before you apply.",
-    meansBullets: [
-      "Experience-First does not mean that an MBA is unsuitable for you. It means that your goals are beginning to align with an MBA, but your current profile may still need stronger professional evidence.",
-      "Your next step is to build the responsibility, leadership exposure, and measurable impact that will strengthen both your MBA experience and your future application.",
-    ],
-    nextStepIntro: "Over the next 12–24 months, focus on building:",
-    nextStepBullets: [
-      "Increasing responsibility",
-      "Leadership exposure",
-      "Cross-functional experience",
-      "Clear professional achievements",
-      "Measurable impact",
-      "Stronger knowledge of your target field",
-      "Evidence supporting your intended career transition",
-    ],
-    alternatePath:
-      "While building your professional profile, you may consider short courses, certifications, stretch assignments, or leadership opportunities that strengthen the capabilities connected to your future MBA goals.",
-    ctaHeading: "BUILD YOUR FUTURE MBA STRATEGY WITH M7",
-    ctaSupportingText:
-      "Work with an M7 admissions expert to build a focused 12–24 month profile-development roadmap for your future MBA application.",
-  },
-
-  "experience-first-masters": {
-    id: "experience-first-masters",
-    label: "Experience-First",
-    subLabel: "Tentatively Master's",
-    tagline:
-      "Your Master's direction is becoming clearer, but building stronger subject knowledge and relevant evidence first may help you choose and pursue the right program.",
-    accent: "orange",
-    whyText: [
-      "Your answers show growing alignment with focused expertise, specialist capability, and a clearly defined professional field.",
-      "However, your current profile may not yet include enough relevant experience, subject exposure, academic preparation, or evidence of commitment to confirm the right specialization and compete strongly for your target programs.",
-      "Building these foundations first can help you make a more confident program choice, present a clearer academic and career story, and gain greater value from the degree.",
-    ],
-    emergingDirection: {
-      text: "Your goals show stronger alignment with a Specialized Master's, but further subject exploration, relevant experience, and academic preparation may strengthen your direction and application.",
-    },
-    meansHeadline: "A Specialized Master's may be the right future direction, but your profile could become more focused and competitive.",
-    meansStatement: "A Specialized Master's may be the right future direction, but your profile could become more focused and competitive.",
-    meansBullets: [
-      "Experience-First does not mean that a Specialized Master's is unsuitable for you. It means that your interest in a specialist field is beginning to take shape, but you may need stronger evidence that this is the right academic and professional direction.",
-      "Your next step is to build relevant exposure, subject knowledge, and achievements that connect clearly to your intended field.",
-      "This preparation can help you choose the right specialization and explain why the degree is necessary for your next career step.",
-    ],
-    nextStepIntro: "Over the next 6–18 months, focus on building:",
-    nextStepBullets: [
-      "Relevant internships or professional exposure",
-      "Projects connected to your intended field",
-      "Stronger technical, analytical, or subject-specific capabilities",
-      "Academic preparation for your target programs",
-      "Clear evidence of interest and commitment",
-      "A stronger understanding of potential career outcomes",
-      "Achievements that demonstrate your ability to apply what you have learned",
-    ],
-    alternatePath:
-      "While continuing to build your profile, you may consider a short course, certification, internship, research experience, or relevant project in your target field. These experiences can help you test your interest, strengthen your academic or technical foundation, and provide clearer evidence for your future application.",
-    ctaHeading: "BUILD YOUR FUTURE MASTER'S STRATEGY WITH M7",
-    ctaSupportingText: "Work with an M7 admissions expert to identify the right specialization and build a focused 6–18 month profile-development roadmap.",
-  },
-
   "exploration-first": {
     id: "exploration-first",
     label: "Exploration-First",
     tagline: "Before choosing a degree, your most valuable next step is clarifying what you want graduate school to help you achieve.",
     accent: "navy",
     whyText: [
-      "Your answers suggest that you are open to graduate study and interested in several possible directions, but there is not yet a clear pattern showing whether your future would be better served by broad business leadership or deeper specialist expertise.",
-      "You may be thinking about graduate school because you want greater career progress, a change in direction, or access to new opportunities. However, the connection between the degree, your target role, and your longer-term direction may still need further clarification.",
+      "Your answers suggest you're open to graduate study and interested in several possible directions, but there isn't yet a clear, consistent pattern showing whether your future is better served by broad business leadership or deeper specialist expertise. Several of your responses reflect exploration rather than a settled direction.",
     ],
     meansHeadline: "It is currently too early to conclude that either an MBA or a Specialized Master's is the clearer fit.",
     meansStatement: "It is currently too early to conclude that either an MBA or a Specialized Master's is the clearer fit.",
@@ -231,12 +148,18 @@ export const results: Record<ResultId, ResultContent> = {
   },
 };
 
-/** Tie-breaker Step 4 ("Mixed Fit") — inserted into the primary result when MBA Fit and
- *  Master's Fit are exactly equal after all other tie-breakers are applied. */
-export const mixedFitNote =
-  "You show meaningful fit with both paths. Your final decision should depend on whether your next step requires broader business leadership or deeper specialist expertise.";
+/** Emerging Direction copy (PDF p.26): surfaced on the Exploration-First result when the
+ *  Tie-Breaker Logic resolves an early lean. The deck doesn't print card copy for this state
+ *  (only its own qualitative rule labels and the "not a final answer" framing it explicitly
+ *  requires), so the sentence below is written to match that framing exactly rather than
+ *  inventing separate marketing copy. */
+export const emergingDirectionText: Record<"mba" | "masters", string> = {
+  mba: "Your answers show an early lean toward an MBA. This is a signal worth exploring alongside your next step below — not a final answer.",
+  masters:
+    "Your answers show an early lean toward a Specialized Master's. This is a signal worth exploring alongside your next step below — not a final answer.",
+};
 
-/** Closing brand CTA shown beneath every result (PDF page 52). */
+/** Closing brand CTA shown beneath every result (PDF page 36). */
 export const closingCta = {
   eyebrow: "Ready to",
   headline: "Find Your M7?",
