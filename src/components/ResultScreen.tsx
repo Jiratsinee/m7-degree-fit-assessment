@@ -1,5 +1,5 @@
 import type { AssessmentResult } from "../logic/scoring";
-import { results, closingCta, ctaButtonLabel, ctaLink, emergingDirectionText } from "../data/results";
+import { results, closingCta, ctaButtonLabel, ctaLink, emergingDirectionText, contactUsLabel, contactUsLink } from "../data/results";
 import type { ScoreKey } from "../data/questions";
 import { M7Logo } from "./M7Logo";
 import "./ResultScreen.css";
@@ -169,6 +169,9 @@ export function ResultScreen({ result, respondentName, onRestart }: ResultScreen
           <button type="button" className="btn btn-on-dark" onClick={onRestart}>
             Retake the Assessment
           </button>
+          <a className="btn btn-primary" href={contactUsLink} target="_blank" rel="noopener noreferrer">
+            {contactUsLabel}
+          </a>
         </div>
       </footer>
     </div>

@@ -39,6 +39,10 @@ export interface ResultContent {
 export const ctaButtonLabel = "Book a Strategic Consultation";
 export const ctaLink = "https://bit.ly/DegreeFit_M7Framework";
 
+/** M7 Consulting's LINE contact link, shown at the very end of the result page. */
+export const contactUsLabel = "Contact Us";
+export const contactUsLink = "https://lin.ee/O9ZkknE";
+
 export const results: Record<ResultId, ResultContent> = {
   "mba-oriented": {
     id: "mba-oriented",
